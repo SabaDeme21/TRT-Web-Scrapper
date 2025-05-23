@@ -3,7 +3,7 @@ import random
 import time
 import undetected_chromedriver as uc
 import pandas as pd
-from encrypt import MainClass
+from encrypt import Encrypt
 
 
 class TRTScraper:
@@ -107,6 +107,7 @@ class TRTScraper:
 
         # Extract and loop through multiple pages
         link_groups = [self.extract_links()]
+        print(link_groups)
         for group_index in range(3):  # You used 3 rounds of link clicking
             if group_index < len(link_groups):
                 new_links = []
@@ -146,6 +147,12 @@ class TRTScraper:
         finally:
             if self.driver:
                 self.driver.quit()
+
+
+if __name__ == "__main__":
+    main = Encrypt()
+    scraper = TRTScraper(email=main.decrypt_message(main.email()), password=main.decrypt_message(main.password()))
+    scraper.run()
 
 
 if __name__ == "__main__":
